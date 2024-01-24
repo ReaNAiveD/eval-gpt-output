@@ -1,0 +1,4 @@
+azure-cosmos
+cli_validator
+numpy
+openai
