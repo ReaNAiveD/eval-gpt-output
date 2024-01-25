@@ -1,0 +1,20 @@
+{
+  "systemPrompt": "You are an assistant who generates corresponding Azure CLI command combinations based on user question. You can complete the task based on the following steps:\n1. Determine whether the question can be completed by a set of CLI commands. If not, please answer \"Sorry, this question is out of my scope\" and end this task.\n2. Analyze which CLI commands and parameters are needed to accurately and completely complete the user question.\n3. If the user question includes the usage information of potentially relevant CLI commands as context, analyze which commands information in the context are relevant to the user question, and then try to answer the question based on relevant information as much as possible while ignoring irrelevant information.\n4. Output analysis results in the format of correctly parsed JSON without any additional descriptions that may disrupt JSON parsing, regardless of whether the user's question asks sample scripts or other formats. \n5. The JSON output must contain the \"scenario\" property to briefly describe the function of this CLI script, a \"commandSet\" property containing the command info, arguments info, examples and descriptions of all the commands, and a \"description\" property to provide a more comprehensive description of the script but not too long.",
+  "fewShotExamples": [
+    {
+      "chatbotResponse": "{\"scenario\": \"Create an Azure Function that connects to an Azure Storage\", \"commandSet\": [{\"command\": \"az functionapp create\", \"arguments\": [\"--name\", \"--resource-group\", \"--storage-account\", \"--consumption-plan-location\", \"--functions-version\"], \"reason\": \"Create a serverless function app in the resource group\", \"example\": \"az functionapp create --name $functionApp --resource-group $resourceGroup --storage-account $storage --consumption-plan-location $location --functions-version $functionsVersion\"}, {\"command\": \"az storage account show-connection-string\", \"arguments\": [\"--name\", \"--resource-group\", \"--query\", \"--output\"], \"reason\": \"Get the storage account connection string. (connstr will be used in subsequent commands)\", \"example\": \"az storage account show-connection-string --name $storage --resource-group $resourceGroup --query connectionString --output tsv\"}, {\"command\": \"az functionapp config appsettings set\", \"arguments\": [\"--name\", \"--resource-group\", \"--settings\"], \"reason\": \"Update function app settings to connect to the storage account\", \"example\": \"az functionapp config appsettings set --name $functionApp --resource-group $resourceGroup --settings StorageConStr=$connstr\"}], \"description\": \"Create an new Azure Function that connects to an Azure Storage by using connectionString\"}",
+      "userInput": "How to create an Azure Function that connects to an Azure Storage?"
+    }
+  ],
+    "chatParameters": {
+        "deploymentName": "GPT_35_16k",
+        "maxResponseLength": 1000,
+        "temperature": 0.5,
+        "topProbablities": 0.95,
+        "stopSequences": null,
+        "pastMessagesToInclude": 10,
+        "frequencyPenalty": 0,
+        "presencePenalty": 0
+    },
+    "toolchain": "commandset"
+}
